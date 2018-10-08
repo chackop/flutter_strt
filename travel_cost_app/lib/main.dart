@@ -21,7 +21,7 @@ class TravelForm extends StatefulWidget {
 class _TravelState extends State<TravelForm> {
   String result = '';
   final _currencies = ['Dollars', 'Euro', 'Pounds', 'Rupees'];
-  final double _formDistance = 5.0;
+  final double _formPadding = 5.0;
   String _currency = 'Dollars';
   TextEditingController distanceController = TextEditingController();
   TextEditingController avgController = TextEditingController();
@@ -37,107 +37,110 @@ class _TravelState extends State<TravelForm> {
           backgroundColor: Colors.blueAccent,
         ),
         body: Container(
-            padding: EdgeInsets.all(15.0),
-            child: Column(
-              children: <Widget>[
+          padding: EdgeInsets.all(15.0),
+          child: Column(
+            children: <Widget>[
               Padding(
-                padding:
-                    EdgeInsets.only(top: _formDistance, bottom: _formDistance),
-                child: TextField(
-                  controller: distanceController,
-                  decoration: InputDecoration(
-                      labelText: 'Distance',
-                      hintText: 'e.g. 124',
-                      labelStyle: textStyle,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.only(top: _formDistance, bottom: _formDistance),
-                child: TextField(
-                  controller: avgController,
-                  decoration: InputDecoration(
-                      labelText: 'Distance per unit',
-                      hintText: 'e.g. 17',
-                      labelStyle: textStyle,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0))),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: _formDistance, bottom: _formDistance),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: priceController,
-                          decoration: InputDecoration(
-                              labelText: 'Price',
-                              hintText: 'e.g. 1.65',
-                              labelStyle: textStyle,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0))),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      Container(
-                        width: _formDistance * 5,
-                      ),
-                      Expanded(
-                        child: DropdownButton<String>(
-                          items: _currencies.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          value: _currency,
-                          onChanged: (String value) {
-                            _onDropdownChanged(value);
-                          },
-                        ),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: RaisedButton(
-                              color: Theme.of(context).primaryColorDark,
-                              textColor: Theme.of(context).primaryColorLight,
-                              onPressed: () {
-                                setState(() {
-                                  result = _calculate();
-                                });
-                              },
-                              child: Text(
-                                'Submit',
-                                textScaleFactor: 1.5,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: RaisedButton(
-                              color: Theme.of(context).buttonColor,
-                              textColor: Theme.of(context).primaryColorDark,
-                              onPressed: () {
-                                _reset();
-                              },
-                              child: Text(
-                                'Reset',
-                                textScaleFactor: 1.5,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(result),
-                    ],
+                  padding:
+                      EdgeInsets.only(top: _formPadding, bottom: _formPadding),
+                  child: TextField(
+                    controller: distanceController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "e.g. 124",
+                        labelText: "Distance",
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
                   )),
-            ])));
+              Padding(
+                  padding:
+                      EdgeInsets.only(bottom: _formPadding, top: _formPadding),
+                  child: TextField(
+                    controller: avgController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "e.g. 17",
+                        labelText: "Distance per Unit",
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  )),
+              Padding(
+                  padding:
+                      EdgeInsets.only(bottom: _formPadding, top: _formPadding),
+                  child: Row(children: [
+                    Expanded(
+                        child: TextField(
+                      controller: priceController,
+                      style: textStyle,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          hintText: "e.g. 1.60",
+                          labelText: "Fuel Cost",
+                          labelStyle: textStyle,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    )),
+                    Container(width: _formPadding * 5),
+                    Expanded(
+                      child: DropdownButton<String>(
+                        items: _currencies.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        value: _currency,
+                        style: textStyle,
+                        onChanged: (value) {
+                          _onDropdownChanged(value);
+                        },
+                      ),
+                    )
+                  ])),
+              Container(
+                height: _formPadding,
+              ),
+              Row(children: [
+                Expanded(
+                    child: RaisedButton(
+                  color: Theme.of(context).primaryColorDark,
+                  textColor: Theme.of(context).primaryColorLight,
+                  onPressed: () {
+                    setState(() {
+                      result = _calculate();
+                    });
+                  },
+                  child: Text(
+                    'Submit',
+                    textScaleFactor: 1.5,
+                  ),
+                )),
+                Expanded(
+                    child: RaisedButton(
+                  color: Theme.of(context).buttonColor,
+                  textColor: Theme.of(context).primaryColorDark,
+                  onPressed: () {
+                    _reset();
+                  },
+                  child: Text(
+                    'Reset',
+                    textScaleFactor: 1.5,
+                  ),
+                )),
+              ]),
+              Container(
+                  margin: EdgeInsets.only(top: _formPadding * 2),
+                  child: Text(
+                    result,
+                    style: textStyle,
+                  )),
+            ],
+          ),
+        ));
   }
 
   _onDropdownChanged(String value) {
