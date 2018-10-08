@@ -1,4 +1,4 @@
-package com.example.helloflutter;
+package com.example.appwidgets;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -1,4 +1,4 @@
-# hello_flutter
+# app_widgets
 
 A new Flutter project.
 
