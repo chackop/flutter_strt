@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
     // List<Todo> todos = List<Todo>();
     // DbHelper helper = DbHelper();
     // helper.initializeDb().then(
-    //   (result) => helper.getTodos().then((result) => todos=result)
+    //   (result) => helper.getTodos().then((res) => todos = res)
     // );
     // DateTime today = DateTime.now();
-    // Todo todo = Todo("Buy Fruites", 1, today.toString(), "And make sure they are good");
+    // Todo todo = Todo("Buy Car", 3, today.toString(), "And make sure they are fast");
     // helper.insertTodo(todo);
 
     return new MaterialApp(
