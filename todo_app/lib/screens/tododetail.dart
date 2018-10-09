@@ -8,7 +8,7 @@ class TodoDetail extends StatefulWidget {
   TodoDetail(this.todo);
 
   @override
-  State<StatefulWidget> createState() => TodoDetailState();
+  State<StatefulWidget> createState() => TodoDetailState(todo);
 }
 
 DbHelper helper = DbHelper();
@@ -24,6 +24,7 @@ const mnuBack = 'Back to List';
 
 class TodoDetailState extends State {
   Todo todo;
+  TodoDetailState(this.todo);
   final _priorities = ["High", "Medium", "Low"];
   String _priority = "Low";
 
@@ -148,6 +149,9 @@ class TodoDetailState extends State {
         break;
       default:
     }
+    setState(() {
+          _priority=value;
+        });
   }
 
   String retrivePriority(int value) {
